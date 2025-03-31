@@ -14,8 +14,7 @@ class PlaceList extends StatelessWidget {
           onTap: () {
             Navigator.of(context).push(
               MaterialPageRoute(
-                builder:
-                    (ctx) => FavPlaceScreen(placeName: places[index].title),
+                builder: (ctx) => FavPlaceScreen(place: places[index]),
               ),
             );
           },

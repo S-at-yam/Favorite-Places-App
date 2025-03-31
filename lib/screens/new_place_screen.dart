@@ -48,6 +48,7 @@ class _NewPlaceScreenState extends ConsumerState<NewPlaceScreen> {
             TextField(
               decoration: InputDecoration(label: Text('New Place')),
               controller: _placeNameController,
+              style: TextStyle(color: Colors.white),
             ),
             const SizedBox(height: 20),
             ElevatedButton(
