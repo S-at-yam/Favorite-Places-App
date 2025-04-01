@@ -2,8 +2,10 @@ import 'dart:io';
 
 import 'package:favorite_places/provider/user_places.dart';
 import 'package:favorite_places/widgets/input_picture.dart';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class NewPlaceScreen extends ConsumerStatefulWidget {
   const NewPlaceScreen({super.key});
@@ -17,15 +19,18 @@ class NewPlaceScreen extends ConsumerStatefulWidget {
 class _NewPlaceScreenState extends ConsumerState<NewPlaceScreen> {
   final _placeNameController = TextEditingController();
   File? _selectedImage;
+  final _about = TextEditingController();
 
   void _savePlace() {
     final enteredTitle = _placeNameController.text;
-    if (enteredTitle == 'null' || _selectedImage == null) {
+    if (enteredTitle == 'null' ||
+        _selectedImage == null ||
+        _about.text.isEmpty) {
       return;
     }
     ref
         .read(userPlacesProvider.notifier)
-        .addPlace(enteredTitle, _selectedImage!);
+        .addPlace(enteredTitle, _selectedImage!, _about.text);
     Navigator.of(context).pop();
   }
 
@@ -64,6 +69,28 @@ class _NewPlaceScreenState extends ConsumerState<NewPlaceScreen> {
               onPickImage: (image) {
                 _selectedImage = image;
               },
+            ),
+            const SizedBox(height: 20),
+            Container(
+              height: 250,
+              width: double.infinity,
+              child: TextField(
+                controller: _about,
+                maxLines: null,
+                keyboardType: TextInputType.multiline,
+                style: GoogleFonts.roboto(color: Colors.white),
+
+                decoration: InputDecoration(
+                  label: Text(
+                    'Why is it your favorite place?',
+                    style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                      color: Colors.amber,
+                      fontSize: 20,
+                    ),
+                  ),
+                  border: OutlineInputBorder(),
+                ),
+              ),
             ),
             const SizedBox(height: 20),
 

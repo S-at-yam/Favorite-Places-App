@@ -24,6 +24,33 @@ class FavPlaceScreen extends StatelessWidget {
             height: double.infinity,
             width: double.infinity,
           ),
+          Positioned(
+            bottom: 0,
+            left: 0,
+            right: 0,
+            child: Container(
+              decoration: BoxDecoration(
+                gradient: LinearGradient(
+                  colors: [
+                    const Color.fromARGB(131, 0, 0, 0),
+                    const Color.fromARGB(110, 17, 17, 17),
+                  ],
+                  begin: Alignment.bottomCenter,
+                  end: Alignment.topCenter,
+                ),
+              ),
+              height: MediaQuery.of(context).size.height * 0.3,
+              width: double.infinity,
+              child: Text(
+                place.about,
+                textAlign: TextAlign.center,
+                style: Theme.of(context).textTheme.bodyLarge!.copyWith(
+                  color: Colors.white,
+                  fontSize: 20,
+                ),
+              ),
+            ),
+          ),
         ],
       ),
     );
