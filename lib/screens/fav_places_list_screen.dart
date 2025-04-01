@@ -5,11 +5,25 @@ import 'package:favorite_places/screens/new_place_screen.dart';
 import 'package:favorite_places/widgets/place_list.dart';
 import 'package:flutter/material.dart';
 
-class FavPlacesList extends ConsumerWidget {
+class FavPlacesList extends ConsumerStatefulWidget {
   const FavPlacesList({super.key});
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  ConsumerState<FavPlacesList> createState() {
+    return _FavPlacesListState();
+  }
+}
+
+class _FavPlacesListState extends ConsumerState<FavPlacesList> {
+  late Future<void> _loadedPlace;
+  @override
+  void initState() {
+    super.initState();
+    _loadedPlace = ref.read(userPlacesProvider.notifier).loadPlaces();
+  }
+
+  @override
+  Widget build(BuildContext context) {
     Widget activeScreen;
 
     final userPlace = ref.watch(userPlacesProvider);
@@ -26,7 +40,14 @@ class FavPlacesList extends ConsumerWidget {
     } else {
       activeScreen = Padding(
         padding: const EdgeInsets.all(8.0),
-        child: PlaceList(places: userPlace),
+        child: FutureBuilder(
+          future: _loadedPlace,
+          builder:
+              (context, snapshot) =>
+                  snapshot.connectionState == ConnectionState.waiting
+                      ? Center(child: CircularProgressIndicator())
+                      : PlaceList(places: userPlace),
+        ),
       );
     }
 
