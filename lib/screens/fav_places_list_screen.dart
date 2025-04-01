@@ -25,7 +25,7 @@ class FavPlacesList extends ConsumerWidget {
       );
     } else {
       activeScreen = Padding(
-        padding: const EdgeInsets.all(10.0),
+        padding: const EdgeInsets.all(8.0),
         child: PlaceList(places: userPlace),
       );
     }

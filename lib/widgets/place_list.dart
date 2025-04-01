@@ -18,14 +18,15 @@ class PlaceList extends StatelessWidget {
               ),
             );
           },
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(10),
-          ),
+          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
           leading: CircleAvatar(
             radius: 26,
             backgroundImage: FileImage(places[index].image),
           ),
-          title: Text(places[index].title),
+          title: Text(
+            places[index].title,
+            style: TextStyle(fontWeight: FontWeight.bold, fontSize: 24),
+          ),
         );
       },
       itemCount: places.length,
