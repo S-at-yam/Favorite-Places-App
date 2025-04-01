@@ -24,7 +24,10 @@ class FavPlacesList extends ConsumerWidget {
         ),
       );
     } else {
-      activeScreen = PlaceList(places: userPlace);
+      activeScreen = Padding(
+        padding: const EdgeInsets.all(10.0),
+        child: PlaceList(places: userPlace),
+      );
     }
 
     return Scaffold(
